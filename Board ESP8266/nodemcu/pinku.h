@@ -9,4 +9,4 @@
 #define pin_relay D6
 #define pin_api D5
 #define pin_gas A0
-#define setGas 700 //Threshold Tengah Gass
+#define setGas 300 //Threshold Tengah Gass

@@ -10,10 +10,14 @@
 #include "pinku.h"
 #include "DHT.h"
 
-#define URLWEB "monitor.bywahjoe.com"
+//#define URLWEB "monitor.bywahjoe.com"
+#define URLWEB "erwinembed2021.xyz"
 #define PATH "/post.php"
-#define sha "CE 6A 43 36 69 39 8D 5D 10 F6 2E EA D4 09 3A 79 2F DA 4E 4E"
-//Valid Cert Wed, 15 Sep 2021 03:09:07 GMT
+#define sha "58 45 F0 55 1D 04 21 AC 4D 7D EF 69 60 78 E6 A3 C3 93 AA C9"
+
+//#define sha "CE 6A 43 36 69 39 8D 5D 10 F6 2E EA D4 09 3A 79 2F DA 4E 4E"
+//Valid Cert Tue, 21 Sep 2021 09:18:35 GMT
+
 #define httpsPort 443
 
 String APIKEY = "sendIP4";
