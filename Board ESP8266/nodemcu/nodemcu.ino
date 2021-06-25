@@ -38,6 +38,8 @@ unsigned long now = 0;
 
 void setup() {
   Serial.begin(115200);
+  
+  //init component
   lcd.init();
   lcd.backlight();
   dht.begin();
@@ -67,11 +69,12 @@ void setup() {
 }
 
 void loop() {
-
+  //Get Value Sensor
   mygas = getGas();
   myapi = !digitalRead(pin_api);
   mysuhu = getSuhu();
 
+  //Jika ada gas atau api, relay on
   if (mygas == 1 || myapi == 1) {
     myrelay = 1;
     relayON();
@@ -81,8 +84,10 @@ void loop() {
     relayOFF();
   }
 
+  //LCD Tampil
   tampil();
-
+  
+  //Sending Web
   now = millis();
   if (now - before >= interval) {
     kirimWeb();
@@ -91,6 +96,7 @@ void loop() {
   }
 
 }
+//Get Sensor Gas
 int getGas() {
   int val = analogRead(A0);
   int result = 0;
@@ -99,12 +105,16 @@ int getGas() {
   if (val >= setGas) result = 1;
   return result;
 }
+
+//Relay
 void relayON() {
   digitalWrite(pin_relay, HIGH);
 }
 void relayOFF() {
   digitalWrite(pin_relay, LOW);
 }
+
+//Get Kondisi Warning / Stabil
 String warning(bool val) {
   String notice;
 
@@ -112,6 +122,8 @@ String warning(bool val) {
   else notice = "STABIL";
   return notice;
 }
+
+//Status Relay ON/OFF
 String statusRelay(bool val) {
   String notice;
 
@@ -119,10 +131,14 @@ String statusRelay(bool val) {
   else notice = "OFF";
   return notice;
 }
+
+//Ambil Data Suhu
 float getSuhu() {
   float val = dht.readTemperature();
   return val;
 }
+
+//LCD
 void tampil() {
   lcd.clear();
   lcd.setCursor(0, 0);
@@ -145,6 +161,8 @@ void tampil() {
   lcd.print(statusRelay(myrelay));
   delay(800);
 }
+
+//Push Web
 void kirimWeb() {
   String d1 = String(mygas);
   String d2 = String(myapi);
